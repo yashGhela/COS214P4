@@ -10,6 +10,7 @@ class ConfidentialityDecorator: public CaseDecorator{
     public:
     ConfidentialityDecorator(int cl, CaseComponent* c);
     void setClearance(int l);
-    std::string getStatus();
+    std::string getStatus() override;
+    std::string getStatus(int level) override;
     ~ConfidentialityDecorator(){};
 };

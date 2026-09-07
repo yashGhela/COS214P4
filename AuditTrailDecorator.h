@@ -7,14 +7,18 @@
 
 class AuditTrailDecorator: public CaseDecorator{
     private:
-    std::vector<std::string> auditLog;
-    bool auditEnabled;
+        std::vector<std::string> auditLog;
+        bool auditEnabled;
 
     public:
-    AuditTrailDecorator(std::vector<std::string> al, CaseComponent* c);
-    void enableAudit();
-    void assign();
-
-    ~AuditTrailDecorator(){};
+        AuditTrailDecorator(CaseComponent* c, bool enabled);
+        const std::vector<std::string>& getAuditLog() const;
+        void enableAudit(bool enabled);
+        void assign() override;
+        void start() override;
+        void hold() override;
+        void complete() override;
+        std::string getStatus() override ;
+        ~AuditTrailDecorator(){};
      
 };

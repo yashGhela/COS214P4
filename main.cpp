@@ -6,6 +6,9 @@
 #include "ChronologicalIterator.h"
 #include "TaskOnlyIterator.h"
 #include "HighPriorityIterator.h"
+#include "CaseDecorator.h"
+#include "AuditTrailDecorator.h"
+#include "ConfidentialityDecorator.h"
 
 using namespace std;
 
@@ -107,6 +110,42 @@ int main() {
     // ---- Cleanup ----
     printSeparator("Cleanup");
     delete project;   // deletes phase1/2/3 and all tasks recursively
+
+    // ============================================================
+    // 6. TEST DECORATOR PATTERN
+    // ============================================================
+    printSeparator("Decorator Pattern Test");
+
+    Task* baseTask = new Task(9, "Sensitive Investigation", 4);
+    cout << "Base task: " << baseTask->getName()
+     << " | Status: " << baseTask->getStatus() << endl;
+
+    // Stack: AuditTrail wraps Confidentiality wraps the raw Task
+    CaseComponent* decorated = new AuditTrailDecorator(
+        new ConfidentialityDecorator(5, baseTask), true
+    );
+
+    cout << "\n--- Checking status with LOW clearance (2) ---" << endl;
+    cout << "Status: " << decorated->getStatus(2) << endl;   // should print "Restricted"
+
+    cout << "\n--- Checking status with SUFFICIENT clearance (7) ---" << endl;
+    cout << "Status: " << decorated->getStatus(7) << endl;   // should print real status
+
+    cout << "\n--- Performing lifecycle actions through the decorator ---" << endl;
+    decorated->assign();
+    decorated->start();
+    decorated->complete();
+
+    cout << "\n--- Audit log contents ---" << endl;
+    AuditTrailDecorator* auditPtr = dynamic_cast<AuditTrailDecorator*>(decorated);
+    if (auditPtr) {
+        for (const string& entry : auditPtr->getAuditLog()) {
+            cout << "  " << entry << endl;
+        }
+    }
+    
+
+    delete decorated;   // deletes ConfidentialityDecorator, which deletes baseTask
 
     cout << "\nALL TESTS COMPLETED\n" << endl;
     return 0;
