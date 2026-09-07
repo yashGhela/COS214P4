@@ -16,6 +16,10 @@ build:
 valgrind : build
 	valgrind --leak-check=full --show-leak-kinds=all ./$(TARGET)	
 
+#debugger command (gdb) for debuggin purposes
+debug : build
+	gdb ./$(TARGET)
+
 #deletes the executable and the linker files
 clean:
 	rm -f $(TARGET) *.o
