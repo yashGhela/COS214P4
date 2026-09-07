@@ -12,6 +12,10 @@ SRCS = main.cpp AssigningState.cpp AuditTrailDecorator.cpp CaseDecorator.cpp Chr
 build:
 	$(CXX) $(CXXFLAGS) $(SRCS) -o $(TARGET)
 
+#valgrind command for memory leak testing
+valgrind : build
+	valgrind --leak-check=full --show-leak-kinds=all ./$(TARGET)	
+
 #deletes the executable and the linker files
 clean:
 	rm -f $(TARGET) *.o
