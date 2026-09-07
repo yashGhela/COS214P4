@@ -22,6 +22,7 @@ class Phase  : public CaseComponent {
         std::string getName() const override;
         int getPriority() const override;
         std::string getStatus() override;
+        const std::vector<CaseComponent*>& getChildren() const;
         CaseIterator* createChronologicalIterator();
         CaseIterator* createHighPriorityIterator();
         CaseIterator* createTaskOnlyIterator();

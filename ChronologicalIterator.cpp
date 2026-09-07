@@ -8,18 +8,16 @@ ChronologicalIterator::ChronologicalIterator(const std::vector<CaseComponent*>& 
 
 CaseComponent* ChronologicalIterator::first() {
     index = 0;
-    return list.empty() ? nullptr : list[0];
+    return current();
 }
 
 CaseComponent* ChronologicalIterator::next() {
-    if(!hasNext()) {
-        return nullptr;
-    }
-    return list[index++];
+    index++;
+    return current();
 }
 
 bool ChronologicalIterator::hasNext() {
-    return index < (size_t)list.size();
+    return index < list.size();
 }
 
 CaseComponent* ChronologicalIterator::current() {

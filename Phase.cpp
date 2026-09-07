@@ -15,12 +15,15 @@ Phase::~Phase() {
 }
 
 void Phase::add(CaseComponent* component) {
-    children.push_back(component);
+    if (component != nullptr) {
+        children.push_back(component);
+    }
 }
 
 void Phase::remove(CaseComponent* component) {
     for (auto it = children.begin(); it != children.end(); ++it) {
         if (*it == component) {
+            //delete *it;
             children.erase(it);
             break;
         }
@@ -72,13 +75,17 @@ int Phase::getPriority() const {
     if (children.empty()) {
         return 0;
     }
-    int maxPriority = -1;
+    int maxPriority = 0;
     for (CaseComponent* child : children) {
         if (child && child->getPriority() > maxPriority) {
             maxPriority = child->getPriority();
         }
     }
     return maxPriority;
+}
+
+const std::vector<CaseComponent*>& Phase::getChildren() const {
+    return children;
 }
 
 CaseIterator* Phase::createChronologicalIterator() {

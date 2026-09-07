@@ -10,6 +10,7 @@ class TaskOnlyIterator : public CaseIterator {
     private:
         std::vector<CaseComponent*> list;
         size_t index;
+        void collectTasks(const std::vector<CaseComponent*>& items);
     public:
         TaskOnlyIterator(const std::vector<CaseComponent*>& items);
         ~TaskOnlyIterator() = default;
