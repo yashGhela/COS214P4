@@ -14,6 +14,7 @@ class CaseComponent {
         virtual void hold() = 0;
         virtual void complete() = 0;
         virtual std::string getStatus() = 0;
+        virtual std::string getStatus(int level) {return getStatus() ;} 
         virtual std::string getName() const = 0;
         virtual int getPriority() const = 0;
 };
