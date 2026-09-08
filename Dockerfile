@@ -8,6 +8,6 @@ WORKDIR /app
 #copy all the files
 COPY . .
 
-RUN make valgrind
+RUN make debug
 
 CMD ["./taskforge"]
