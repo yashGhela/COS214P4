@@ -6,7 +6,7 @@ CXXFLAGS = -Wall -g -std=c++11
 #executable
 TARGET = taskforge
 #source files
-SRCS = main.cpp AssigningState.cpp AuditTrailDecorator.cpp CaseDecorator.cpp ChronologicalIterator.cpp CompletedState.cpp ConfidentialityDecorator.cpp HighPriorityDecorator.cpp HighPriorityIterator.cpp InProgressState.cpp OnHoldState.cpp Phase.cpp Task.cpp TaskOnlyIterator.cpp TaskState.cpp
+SRCS = main.cpp RunTimeScenarios.cpp AssigningState.cpp AuditTrailDecorator.cpp CaseDecorator.cpp ChronologicalIterator.cpp CompletedState.cpp ConfidentialityDecorator.cpp HighPriorityDecorator.cpp HighPriorityIterator.cpp InProgressState.cpp OnHoldState.cpp Phase.cpp Task.cpp TaskOnlyIterator.cpp TaskState.cpp
 
 #build command (compiles the .cpp's and links the .o files)
 build:
@@ -18,7 +18,7 @@ valgrind : build
 
 #debugger command (gdb) for debuggin purposes
 debug : build
-	gdb ./$(TARGET)
+	gdb -tui ./$(TARGET)
 
 #deletes the executable and the linker files
 clean:
