@@ -47,11 +47,12 @@ int RunTimeScenarios(){
 
     CaseIterator* iterator = project->createChronologicalIterator();
 
-    while(iterator->hasNext()){
-        CaseComponent* comp = iterator->next();
-        std::cout<< comp->getStatus() <<std::endl;
+    while (iterator->hasNext()) {
+        CaseComponent* comp = iterator->current();
+        std::cout << comp->getStatus() << std::endl;
+        iterator->next();
     }
-
+    delete iterator;
     //attempt run time changes
 
     api->assign();
@@ -71,20 +72,19 @@ int RunTimeScenarios(){
     decoratedapi->start();
 
     //runtime structural change
-    development->remove(api);
-    testing->add(api);
+    backend->remove(api);
+    testing->add(decoratedapi);
 
 
     CaseIterator* iterator2 =
     project->createChronologicalIterator();
 
-    while (iterator2->hasNext())
-    {
-        CaseComponent* component = iterator2->next();
-
-        std::cout << component->getStatus() << std::endl;
+    while (iterator2->hasNext()) {
+        CaseComponent* comp = iterator2->current();
+        std::cout << comp->getStatus() << std::endl;
+        iterator2->next();
     }
-
+    delete iterator2;
 
 
     //scenario 2: High priority task processing 
@@ -95,22 +95,15 @@ int RunTimeScenarios(){
 
     while (priority->hasNext())
     {
-        CaseComponent* component = priority->next();
+        CaseComponent* component = priority->current();
 
         std::cout << component->getStatus() << std::endl;
+
+        priority->next();
     }
+    delete priority;
 
-
-    //cleanup
-
-    while (priority->hasNext())
-    {
-        CaseComponent* component = priority->next();
-
-        std::cout << component->getStatus() << std::endl;
-    }
-
-
-
+    delete project;
+    return 0;
 
 }
