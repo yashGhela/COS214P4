@@ -8,6 +8,6 @@ WORKDIR /app
 #copy all the files
 COPY . .
 
-RUN make debug
+RUN make 
 
-CMD ["./taskforge"]
+CMD ["make","debug"]
