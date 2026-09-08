@@ -1,7 +1,7 @@
 # Docker Commands
 
 DOCKER_BUILDKIT=0 docker build -t taskforge .
-docker run taskforge
+docker run -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined taskforge
 
 # to run in WSL:
 go to docker desktop
