@@ -12,6 +12,8 @@
 
 using namespace std;
 
+int RunTimeScenarios(); //function to test various runtime scenarios of ownership and state changes of tasks and phases
+
 void printSeparator(const string& title) {
     cout << "\n========== " << title << " ==========" << endl;
 }
@@ -146,6 +148,9 @@ int main() {
     
 
     delete decorated;   // deletes ConfidentialityDecorator, which deletes baseTask
+
+    printSeparator("Runtime Scenarios");
+    RunTimeScenarios();
 
     cout << "\nALL TESTS COMPLETED\n" << endl;
     return 0;
