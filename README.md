@@ -1,4 +1,5 @@
 # Docker Commands
+
 DOCKER_BUILDKIT=0 docker build -t taskforge .
 docker run taskforge
 
@@ -12,6 +13,12 @@ hit apply
 Also go under resources
 WSL intergration
 toggle on your linux distro
+
+lastly run these commands in wsl:
+sudo service docker start
+docker ps
+
+the docker ps should show a list of your containers
 
 # Makefile commands:
 make - basic build functionality
